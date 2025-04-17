@@ -1,0 +1,58 @@
+erDiagram
+    users ||--o{ resumes : "1:N"
+    resumes ||--o{ courses : "1:N"
+    resumes ||--o{ work_experience : "1:N"
+    resumes ||--o{ skills : "1:N"
+    resumes ||--o{ contacts : "1:N"
+
+    users {
+        int user_id PK
+        varchar(255) email
+        varchar(255) password_hash
+        varchar(100) full_name
+        timestamp created_at
+    }
+
+    resumes {
+        int resume_id PK
+        int user_id FK
+        varchar(255) title
+        text summary
+        boolean is_public
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    courses {
+        int course_id PK
+        int resume_id FK
+        varchar(255) name
+        varchar(255) institution
+        date completion_date
+    }
+
+    work_experience {
+        int work_id PK
+        int resume_id FK
+        varchar(255) company
+        varchar(255) position
+        date start_date
+        date end_date
+        text description
+    }
+
+    skills {
+        int skill_id PK
+        int resume_id FK
+        varchar(100) name
+        varchar(50) level
+    }
+
+    contacts {
+        int contact_id PK
+        int resume_id FK
+        varchar(20) phone
+        varchar(255) linkedin_url
+        varchar(255) github_url
+        varchar(255) portfolio_url
+    }
